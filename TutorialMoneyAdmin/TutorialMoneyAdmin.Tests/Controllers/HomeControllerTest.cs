@@ -1,17 +1,25 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TutorialMoneyAdmin;
 using TutorialMoneyAdmin.Controllers;
 
 namespace TutorialMoneyAdmin.Tests.Controllers
 {
+    /// <summary>
+    /// デフォルトコントローラー.
+    /// </summary>
     [TestClass]
     public class HomeControllerTest
     {
+        /// <summary>
+        /// testtest
+        /// </summary>
+        /// <param name="test1">１つめの引数あれば使う</param>
+        /// <param name="test2">２つめの引数あれば使う</param>
         [TestMethod]
         public void Index()
         {
@@ -25,6 +33,11 @@ namespace TutorialMoneyAdmin.Tests.Controllers
             Assert.IsNotNull(result);
         }
 
+        /// <summary>
+        /// testtest
+        /// </summary>
+        /// <param name="test1">１つめの引数あれば使う</param>
+        /// <param name="test2">２つめの引数あれば使う</param>
         [TestMethod]
         public void About()
         {
@@ -38,6 +51,11 @@ namespace TutorialMoneyAdmin.Tests.Controllers
             Assert.AreEqual("Your application description page.", result.ViewBag.Message);
         }
 
+        /// <summary>
+        /// testtest
+        /// </summary>
+        /// <param name="test1">１つめの引数あれば使う</param>
+        /// <param name="test2">２つめの引数あれば使う</param>
         [TestMethod]
         public void Contact()
         {
