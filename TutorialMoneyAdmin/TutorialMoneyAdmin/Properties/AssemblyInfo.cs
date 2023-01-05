@@ -33,6 +33,6 @@ using System.Runtime.InteropServices;
 // 既定値にすることができます:
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
-//log4netの設定ファイルの置き場所
-[assembly: log4net.Config.XmlConfigurator(ConfigFile = "./Log/Log4net.xml", Watch = true)]
 
+// log4netの設定ファイルの置き場所
+[assembly: log4net.Config.XmlConfigurator(ConfigFile = "./Log/Log4net.xml", Watch = true)]
