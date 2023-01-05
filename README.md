@@ -32,3 +32,11 @@ github+AWS CodeBuild を検討する。
 ### コード文書化
 XML Documentation を DocFX か Sandcastle で整形する予定。  
 https://docs.microsoft.com/ja-jp/dotnet/csharp/codedoc
+
+
+## コミット
+- fix：バグ修正
+- add：機能追加
+- update：機能変更
+- remove：機能削除
+- doc：資料の修正や更新
