@@ -8,8 +8,17 @@ using log4net;
 
 namespace TutorialMoneyAdmin.Controllers
 {
+    /// <summary>
+    /// デフォルトのホームコントローラー
+    /// </summary>
     public class HomeController : Controller
     {
+        /// <summary>
+        /// testtest
+        /// </summary>
+        /// <param name="test1">１つめの引数あれば使う</param>
+        /// <param name="test2">２つめの引数あれば使う</param>
+        /// <returns>戻り値記載します</returns>
         public ActionResult Index()
         {
             // ログ取得
@@ -28,6 +37,12 @@ namespace TutorialMoneyAdmin.Controllers
             return View();
         }
 
+        /// <summary>
+        /// testtest
+        /// </summary>
+        /// <param name="test1">１つめの引数あれば使う</param>
+        /// <param name="test2">２つめの引数あれば使う</param>
+        /// <returns>戻り値記載します</returns>
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -35,6 +50,12 @@ namespace TutorialMoneyAdmin.Controllers
             return View();
         }
 
+        /// <summary>
+        /// testtest
+        /// </summary>
+        /// <param name="test1">１つめの引数あれば使う</param>
+        /// <param name="test2">２つめの引数あれば使う</param>
+        /// <returns>戻り値記載します</returns>
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

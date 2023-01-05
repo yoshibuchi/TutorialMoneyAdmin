@@ -2,8 +2,15 @@
 
 namespace TutorialMoneyAdmin
 {
+    /// <summary>
+    /// javascript,CSSファイルなどの読み込みを設定します。
+    /// </summary>
     public class BundleConfig
     {
+        /// <summary>
+        /// javascript,CSSファイルなどの読み込みを設定します。
+        /// </summary>
+        /// <param name="bundles">使いたいファイルを追加していく</param>
         // バンドルの詳細については、https://go.microsoft.com/fwlink/?LinkId=301862 を参照してください
         public static void RegisterBundles(BundleCollection bundles)
         {
