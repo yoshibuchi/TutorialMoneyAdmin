@@ -1,11 +1,13 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - マイ ASP.NET アプリケーション</title>
+    @* BundleConfigファイル（Js,Cssファイル）でまとめてファイル読み込む *@
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/bundles/calenderCss")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
@@ -35,9 +37,10 @@
             <p>&copy; @DateTime.Now.Year - マイ ASP.NET アプリケーション</p>
         </footer>
     </div>
-
+    @* BundleConfigファイル（Js,Cssファイル）でまとめてファイル読み込む *@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/calenderJs")
     @RenderSection("scripts", required: false)
 </body>
 </html>

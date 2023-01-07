@@ -25,8 +25,8 @@ namespace TutorialMoneyAdmin.Controllers
             ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
             // ログ一覧　Info,Errorを主に使う
-            logger.Info($"{this.RouteData.Values["controller"].ToString()}コントローラーの{MethodBase.GetCurrentMethod().Name}アクションを実行しました！");
-            logger.Error($"{this.RouteData.Values["controller"].ToString()}コントローラーの{MethodBase.GetCurrentMethod().Name}アクションでエラー発生！");
+            // logger.Info($"{this.RouteData.Values["controller"].ToString()}コントローラーの{MethodBase.GetCurrentMethod().Name}アクションを実行しました！");
+            // logger.Error($"{this.RouteData.Values["controller"].ToString()}コントローラーの{MethodBase.GetCurrentMethod().Name}アクションでエラー発生！");
 
             // logger.Fatal($"{ this.RouteData.Values["controller"].ToString()}コントローラーの{ MethodBase.GetCurrentMethod().Name}アクションで致命的なエラー発生！至急対応してください！");
             // logger.Error("システムが停止するまではいかない障害が発生");
