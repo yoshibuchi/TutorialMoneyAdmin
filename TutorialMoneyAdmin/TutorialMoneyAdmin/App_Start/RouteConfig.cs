@@ -20,10 +20,11 @@ namespace TutorialMoneyAdmin
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            // カレンダー画面をトップ画面とする。
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional });
+                defaults: new { controller = "Calender", action = "Index", id = UrlParameter.Optional });
         }
     }
 }

@@ -1,0 +1,21 @@
+﻿:root {
+    /* 通常時のボタン */
+    --fc-button-bg-color: #666;
+    --fc-button-border-color: #666;
+    /* ホバー時のボタン */
+    --fc-button-hover-bg-color: #444;
+    --fc-button-hover-border-color: #444;
+    /* 選択時のボタン */
+    --fc-button-active-bg-color: #444;
+    --fc-button-active-border-color: #444;
+    /* 今日のマス */
+    --fc-today-bg-color: #eee;
+    /* イベント */
+    --fc-event-bg-color: #666;
+    --fc-event-border-color: #666;
+}
+
+body {
+    font-family: "游ゴシック体", "YuGothic", "游ゴシック", "Yu Gothic", "Noto Sans JP", "メイリオ", sans-serif;
+    font-weight: 400;
+}

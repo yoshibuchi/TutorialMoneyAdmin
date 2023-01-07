@@ -31,6 +31,18 @@ namespace TutorialMoneyAdmin
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            // bundles.UseCdn = true;
+            // カレンダー画面のJS、CSSファイルの読み込み
+            bundles.Add(new ScriptBundle("~/bundles/calenderJs").Include(
+                      "~/Scripts/Calender/calender.js",
+                      "~/Scripts/Plugins/main.js",
+                      "~/Scripts/Plugins/main.min.js"));
+
+            bundles.Add(new StyleBundle("~/bundles/calenderCss").Include(
+                      "~/Css/Calender/calender.css",
+                      "~/Css/Plugins/main.css",
+                      "~/Css/Plugins/main.min.css"));
         }
     }
 }
