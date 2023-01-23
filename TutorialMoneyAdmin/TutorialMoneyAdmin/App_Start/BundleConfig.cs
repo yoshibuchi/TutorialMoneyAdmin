@@ -37,7 +37,8 @@ namespace TutorialMoneyAdmin
             bundles.Add(new ScriptBundle("~/bundles/calenderJs").Include(
                       "~/Scripts/Calender/calender.js",
                       "~/Scripts/Plugins/main.js",
-                      "~/Scripts/Plugins/main.min.js"));
+                      "~/Scripts/Plugins/main.min.js",
+                      "~/Scripts/Plugins/ja.js"));
 
             bundles.Add(new StyleBundle("~/bundles/calenderCss").Include(
                       "~/Css/Calender/calender.css",
