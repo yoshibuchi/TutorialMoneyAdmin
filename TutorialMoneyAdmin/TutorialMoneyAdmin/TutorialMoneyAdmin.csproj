@@ -184,6 +184,7 @@
     <Content Include="stylecop.json" />
     <Content Include="stylecop1.json" />
     <Content Include="Views\Calender\Index.cshtml" />
+    <Content Include="Views\Calender\_UpdateIncomeOrSpend.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

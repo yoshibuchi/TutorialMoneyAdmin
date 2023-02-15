@@ -19,5 +19,14 @@ namespace TutorialMoneyAdmin.Controllers.Calender
         {
             return View();
         }
+
+        /// <summary>
+        /// カレンダー日付クリック時に生成されるモーダルを作成
+        /// </summary>
+        /// <returns>戻り値記載します</returns>
+        public ActionResult ShowCalenderModal()
+        {
+            return PartialView("~/Views/Calender/_UpdateIncomeOrSpend.cshtml");
+        }
     }
 }
