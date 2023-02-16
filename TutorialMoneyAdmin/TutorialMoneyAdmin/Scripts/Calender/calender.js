@@ -4,13 +4,9 @@ document.addEventListener('DOMContentLoaded', function () {
     var calendar = new FullCalendar.Calendar(calendarEl, {
         // カレンダーに表示する文字の言語選択
         locale: "ja",
-        timeFormat: 'HH:mm',
-        timezone: 'Asia/Tokyo',
-        eventLimit: true,
         editable: true,
         slotEventOverlap: true,
         selectable: true,
-        selectHelper: true,
         selectMinDistance: 1,
         events: function (start, end, timezone, callback) {
             // 前回実装したカレンダーデータ取得部分
@@ -38,13 +34,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.log(error);
             });
         },
-        select: function (start, end) {
-            // カレンダー空白部分をドラッグして範囲指定した時のイベント
-            date = "";
-        },
-        eventDrop: function (event, delta, revertFunc, jsEvent, ui, view) {
-            // イベントをドラッグして別日に移動させた時のイベント
-        },
+        //select: function (start, end) {
+        //    // カレンダー空白部分をドラッグして範囲指定した時のイベント
+        //    date = "";
+        //},
+        //eventDrop: function (event, delta, revertFunc, jsEvent, ui, view) {
+        //    // イベントをドラッグして別日に移動させた時のイベント
+        //},
         headerToolbar: {
             // ヘッダーのボタン
             left: "prev,next today",

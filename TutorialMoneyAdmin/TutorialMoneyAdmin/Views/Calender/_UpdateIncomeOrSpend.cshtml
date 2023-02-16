@@ -151,29 +151,51 @@
                 </button>
             </div>
             <div class="modal-body">
-                <ul class='tab-menu'>
-                    <li id='important'>
-                        <label class='active'>
-                            <a class="btn btn-small btn-danger" href="#">
-                                <i class="minus-payment icon-minus-sign icon-2x"></i> 
-                            </a>
-                            支出
-                        </label>
-                    </li>
-                    <li id='info'>
-                        <label class='active'>
+                <div class="container">
+                    <div class="d-flex row" id="tab-menu">
+                        <div class="col-6 d-flex align-items-center justify-content-center" style="max-width:300px;" id="info">
                             <a class="btn btn-small btn-info" href="#">
                                 <i class="plus-payment icon-plus-sign icon-2x"></i>
                             </a>
-                            収入
-                        </label>
-                    </li>
-                </ul>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                            <label class="ml-2 font-weight-bold">収入</label>
+                        </div>
+                        <div class="col-6 d-flex align-items-center justify-content-center" style="max-width:300px;" id="important">
+                            <a class="btn btn-small btn-danger" href="#">
+                                <i class="minus-payment icon-minus-sign icon-2x"></i>
+                            </a>
+                            <label class="ml-2 font-weight-bold">支出</label>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="container mt-3" id="select-detail-area">
+                    <div class="row">
+                        <div class="col-3" style="max-width:300px;">
+                            <label class="font-weight-bold text-info ml-2">日付</label>
+                        </div>
+                        <div class="col-7 right-column">
+                            <input id="updated-at" style="width:200px; vertical-align: top;" type="date" name="" />
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="container mt-3">
+                    <div class="row">
+                        <div class="col-3" id="amount-important">
+                            <label class="font-weight-bold text-info ml-2">収入金額</label>
+                        </div>
+                        <div class="input-group mb-3 col-7">
+                            <span class="input-group-text">＋</span>
+                            <input type="number" class="form-control" aria-label="">
+                            <span class="input-group-text">円</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">登録</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
