@@ -21,8 +21,10 @@ document.addEventListener('DOMContentLoaded', function () {
         dateClick: function (date, jsEvent, view) {
             // カレンダー空白部分クリック時のイベント
             date = date.dateStr;
+            mode = 1;
             axios.post('/Calender/ShowCalenderModal', {
                 date: date,
+                mode: mode,
             })
             .then(function (res) {
                 data = res.data;
@@ -53,3 +55,23 @@ document.addEventListener('DOMContentLoaded', function () {
         // カレンダーの描画
         calendar.render();
 });
+
+function setCalenderModalInfo(date, val) {
+    //モーダル画面再描画時に多重にならないようにする（黒くならないようにする。）
+    $('.modal-backdrop').remove();
+    let detailDate = date;
+    let incomeOrSpendMode = val;
+    axios.post('/Calender/ShowCalenderModal', {
+        date: detailDate,
+        mode: incomeOrSpendMode,
+    })
+    .then(function (res) {
+        data = res.data;
+        $('#modal_base').html(data);
+        // モーダル表示
+        $('#modal_base').find('.modal').modal('show');
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+}
