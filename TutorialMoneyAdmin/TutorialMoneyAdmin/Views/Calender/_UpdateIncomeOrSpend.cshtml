@@ -14,13 +14,13 @@
                 <div class="container mb-4">
                     <div class="d-flex row" id="tab-menu">
                         <div class="col-6 d-flex align-items-center justify-content-center" style="max-width:300px;" id="info">
-                            <a class="btn btn-small btn-info" onclick="setCalenderModalInfo(@Model.Date, 1)">
+                            <a class="btn btn-small btn-info" onclick="setCalenderModalInfo(1)">
                                 <i class="plus-payment icon-plus-sign icon-2x"></i>
                             </a>
                             <label class="ml-2 font-weight-bold">収入</label>
                         </div>
                         <div class="col-6 d-flex align-items-center justify-content-center" style="max-width:300px;" id="important">
-                            <a class="btn btn-small btn-danger" onclick="setCalenderModalInfo(@Model.Date, 2)">
+                            <a class="btn btn-small btn-danger" onclick="setCalenderModalInfo(2)">
                                 <i class="minus-payment icon-minus-sign icon-2x"></i>
                             </a>
                             <label class="ml-2 font-weight-bold">支出</label>
@@ -32,8 +32,8 @@
                         <div class="col-3 @Model.IncomeOrSpendSeparateBorderColor left-column align-items-center justify-content-center" style="max-width:300px;">
                             <label class="font-weight-bold @Model.IncomeOrSpendWordColor ml-2 mt-2 mb-2">日付</label>
                         </div>
-                        <div class="col-7 right-column align-items-center justify-content-center ml-2 mt-2 mb-2">
-                            <input id="updated-at" style="width:200px; vertical-align: top;" type="date" value="@Model.Date" />
+                        <div class="col-7 right-column align-items-center justify-content-center ml-2 mt-2 mb-2 date">
+                            @Html.EditorFor(m => m.IncomeOrSpendDate)
                         </div>
                     </div>
                 </div>
@@ -44,7 +44,14 @@
                         </div>
                         <div class="input-group col-7 right-column align-items-center justify-content-center">
                             <span class="input-group-text ml-2 mt-2 mb-2">@Model.PlusOrMinusMark</span>
-                            <input type="number" class="form-control" aria-label="">
+                            @if (Model.IncomeOrSpendMode == 1)
+                            {
+                                @Html.EditorFor(m => m.IncomeMoney, new { htmlAttributes = new { @class = "form-control" } })
+                            }
+                            else
+                            {
+                                @Html.EditorFor(m => m.SpendMoney, new { htmlAttributes = new { @class = "form-control" } })
+                            }
                             <span class="input-group-text mt-2 mb-2">円</span>
                         </div>
                     </div>
@@ -59,21 +66,13 @@
                             </span>
                         </div>
                         <div class="col-7 right-column align-items-center justify-content-center" id="amount-important">
-                            <input class="h_l_ctg" autocomplete="off" type="hidden" name="" id="" />
-                            <div class='btn-group btn_l_ctg'>
-                                <a class='btn btn-small dropdown-toggle ml-2 mt-2 mb-2' data-toggle='dropdown' id='' style='width: 200px; height: 20px;'>
-                                    未分類
-                                    <span class='caret'></span>
-                                </a>
+                            <div class='large-category mt-3'>
+                                @Html.DropDownListFor(m => m.SelectLargeCategory, @Model.LargeCategory as SelectList, htmlAttributes: new { @class = "form-control" })
                             </div>
-                            <input class="h_m_ctg" autocomplete="off" type="hidden" name="" id="" />
-                            <div class='btn-group mt-3' id='target-js-content-field'>
-                                <a class='btn btn-small dropdown-toggle v_m_ctg ml-2 mt-2 mb-2' data-toggle='dropdown' id='' style='width: 200px; height: 20px;'>
-                                    未分類
-                                    <span class='caret'></span>
-                                </a>
+                            <div class='middle-category mt-3' id='target-js-content-field'>
+                                @Html.DropDownListFor(m => m.SelectMiddleCategory, @Model.MiddleCategory as SelectList, htmlAttributes: new { @class = "form-control" })
                             </div>
-                            <input id="js-content-field" class="mt-4 ml-3" placeholder="内容をご入力下さい(任意)" type="text" name="" />
+                            @Html.EditorFor(m => m.CategoryRemarks, new { htmlAttributes = new { @class = "form-control mt-3 mb-3", @placeholder = "内容をご入力下さい(任意)" } })
                         </div>
                     </div>
                 </div>

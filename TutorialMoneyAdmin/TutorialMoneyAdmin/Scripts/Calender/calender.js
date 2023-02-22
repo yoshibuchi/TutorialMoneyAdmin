@@ -1,4 +1,7 @@
-﻿// カレンダーの読み込み
+﻿
+const INCOME = 1;
+const SPEND = 2;
+// カレンダーの読み込み
 document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById("calendar");
     var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -56,10 +59,10 @@ document.addEventListener('DOMContentLoaded', function () {
         calendar.render();
 });
 
-function setCalenderModalInfo(date, val) {
+function setCalenderModalInfo(val) {
     //モーダル画面再描画時に多重にならないようにする（黒くならないようにする。）
     $('.modal-backdrop').remove();
-    let detailDate = date;
+    let detailDate = $('#IncomeOrSpendDate').val();;
     let incomeOrSpendMode = val;
     axios.post('/Calender/ShowCalenderModal', {
         date: detailDate,
@@ -74,4 +77,40 @@ function setCalenderModalInfo(date, val) {
     .catch(function (error) {
         console.log(error);
     });
+}
+
+$('body').on('change', '#SelectLargeCategory', function () {
+    var selectCategory = $('#SelectLargeCategory').val();
+    var incomeOrSpendMode = $('#IncomeOrSpendMode').val();
+    let categoryNum = '';
+    ReloadMiddleCategory(selectCategory, incomeOrSpendMode, categoryNum);
+})
+
+function ReloadMiddleCategory(selectCategory, incomeOrSpendMode, categoryNum) {
+    axios.post('/Calender/ReloadMiddleCategory', {
+        selectCategory: selectCategory,
+        mode: incomeOrSpendMode,
+    })
+        .then(function (res) {
+            registCategoryDataSet(res, categoryNum, incomeOrSpendMode)
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+}
+
+function registCategoryDataSet(res, categoryNum, incomeOrSpendMode) {
+    let $cmb = $('#SelectMiddleCategory' + categoryNum);
+    let mode = parseInt(incomeOrSpendMode);
+    $cmb.empty();
+    $.each(res.data, function (index, item) {
+        let option = '';
+        if (mode == INCOME) {
+            option = '<option value="' + item.IncomeMiddleCategoryId + '" ' + '>' + item.IncomeMiddleCategoryName + '</option>';
+            $cmb.append(option);
+        } else {
+            option = '<option value="' + item.SpendMiddleCategoryId + '" ' + '>' + item.SpendMiddleCategoryName + '</option>';
+            $cmb.append(option);
+        }
+    })
 }

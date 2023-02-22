@@ -19,5 +19,10 @@ namespace TutorialMoneyAdminDataServices.Models.Calender
         /// 収入金額
         /// <summary>
         public int? IncomeMoney { get; set; }
+
+        /// <summary>
+        /// カレンダーの日付
+        /// <summary>
+        public string Date { get; set; }
     }
 }
