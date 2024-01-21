@@ -19,5 +19,9 @@ namespace TutorialMoneyAdminDataServices.Models.Category
         /// 収入大カテゴリー名
         /// </summary>
         public string IncomeLargeCategoryName { get; set; }
+        /// <summary>
+        /// ドロップダウンの並び順
+        /// </summary>
+        public int Sort { get; set; } = 1;
     }
 }

@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // カレンダーの描画
         calendar.render();
 });
-
+// 収入画面、支出画面の切り替え
 function setCalenderModalInfo(val) {
     //モーダル画面再描画時に多重にならないようにする（黒くならないようにする。）
     $('.modal-backdrop').remove();
@@ -79,26 +79,26 @@ function setCalenderModalInfo(val) {
     });
 }
 
-$('body').on('change', '#SelectLargeCategory', function () {
+$('body').on('change', '#btnOpenMenu', function () {
     var selectCategory = $('#SelectLargeCategory').val();
     var incomeOrSpendMode = $('#IncomeOrSpendMode').val();
     let categoryNum = '';
     ReloadMiddleCategory(selectCategory, incomeOrSpendMode, categoryNum);
 })
-
+// 収入画面、支出画面の切り替え
 function ReloadMiddleCategory(selectCategory, incomeOrSpendMode, categoryNum) {
     axios.post('/Calender/ReloadMiddleCategory', {
         selectCategory: selectCategory,
         mode: incomeOrSpendMode,
     })
-        .then(function (res) {
-            registCategoryDataSet(res, categoryNum, incomeOrSpendMode)
+    .then(function (res) {
+        registCategoryDataSet(res, categoryNum, incomeOrSpendMode)
     })
     .catch(function (error) {
         console.log(error);
     });
 }
-
+// 大カテゴリーにあった中カテゴリーを設定する
 function registCategoryDataSet(res, categoryNum, incomeOrSpendMode) {
     let $cmb = $('#SelectMiddleCategory' + categoryNum);
     let mode = parseInt(incomeOrSpendMode);
@@ -114,3 +114,59 @@ function registCategoryDataSet(res, categoryNum, incomeOrSpendMode) {
         }
     })
 }
+
+$('body').on('mouseover', '.dropdown-item', function () {
+    var incomeOrSpendCategoryName = $(this).text();
+    var incomeOrSpendCategoryId = parseInt($(this).data('value'));
+    var incomeOrSpendMode = parseInt($('#IncomeOrSpendMode').val());
+    let $cmb = $('#dropdown-menu-sub' + incomeOrSpendCategoryId);
+    axios.post('/Calender/ReloadMiddleCategory', {
+        selectCategory: incomeOrSpendCategoryId,
+        mode: incomeOrSpendMode
+    })
+    .then(function (res) {
+        $cmb.empty();
+        $.each(res.data, function (index, item) {
+            let option = '';
+            if (incomeOrSpendMode == INCOME) {
+                option = '<li class="drop-hover dropright"><a class="dropdown-item item-middle-category" data-value="' + item.IncomeMiddleCategoryId + '" >' + item.IncomeMiddleCategoryName + '</a></li>';
+                $cmb.append(option);
+            } else {
+                option = '<li class="drop-hover dropright"><a class="dropdown-item item-middle-category" data-value="' + item.SpendMiddleCategoryId + '" >' + item.SpendMiddleCategoryName + '</a></li>';
+                $cmb.append(option);
+            }
+        })
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+});
+
+$('body').on('click', '.dropdown-item', function () {
+    if (this.className === "dropdown-item item-middle-category") {
+        var itemMiddleId = parseInt(this.dataset.value);
+        var middleCategoryName = this.innerText;
+        var incomeOrSpendMode = parseInt($('#IncomeOrSpendMode').val());
+        axios.post('/Calender/SelectMiddleCategory', {
+            selectMiddleCategoryId: itemMiddleId,
+            mode: incomeOrSpendMode
+        })
+        .then(function (res) {
+            var data = res.data;
+            var mainDropDown = document.getElementById("btnOpenMenu");
+            var subDropdown = document.getElementById("dropdownMenuButton");
+            mainDropDown.innerText = data[0].IncomeLargeCategoryName;
+            subDropdown.innerText = middleCategoryName;
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    } else {
+        var visibleItem = $('.dropdown-toggle', $(this).closest('.dropdown'));
+        visibleItem[0].innerText = this.innerText;
+    }
+    // カテゴリーId取得できる
+    //$(this).attr('value')
+});
+
+

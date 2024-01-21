@@ -39,10 +39,10 @@ namespace TutorialMoneyAdmin.Controllers.Calender
                     model.IncomeOrSpendMode = mode;
                     model.SelectLargeCategory = mode == (int)PaymentType.Income ? (int)UncategorizedType.IncomeLargeCategoryId : (int)UncategorizedType.SpendLargeCategoryId;
                     model.SelectMiddleCategory = mode == (int)PaymentType.Income ? (int)UncategorizedType.IncomeMiddleCategoryId : (int)UncategorizedType.SpendMiddleCategoryId;
-                    var incomeLargeCategoryList = IncomeOrSpendCategoryDataService.CreateIncomeLargeCategory(conn);
-                    var incomeMiddleCategoryList = IncomeOrSpendCategoryDataService.CreateIncomeMiddleCategory(model.SelectLargeCategory, conn);
-                    var spendLargeCategoryList = IncomeOrSpendCategoryDataService.CreateSpendLargeCategory(conn);
-                    var spendMiddleCategoryList = IncomeOrSpendCategoryDataService.CreateSpendMiddleCategory(model.SelectLargeCategory, conn);
+                    model.IncomeLargeCategories = IncomeOrSpendCategoryDataService.CreateIncomeLargeCategory(conn);
+                    model.IncomeMiddleCategories = IncomeOrSpendCategoryDataService.CreateIncomeMiddleCategory(model.SelectLargeCategory, conn);
+                    model.SpendLargeCategories = IncomeOrSpendCategoryDataService.CreateSpendLargeCategory(conn);
+                    model.SpendMiddleCategories = IncomeOrSpendCategoryDataService.CreateSpendMiddleCategory(model.SelectLargeCategory, conn);
                     switch (model.IncomeOrSpendMode)
                     {
                         case (int)PaymentType.Income:
@@ -51,8 +51,10 @@ namespace TutorialMoneyAdmin.Controllers.Calender
                             model.IncomeOrSpendWordColor = "text-info";
                             model.IncomeOrSpendBorderColor = "border border-info";
                             model.IncomeOrSpendSeparateBorderColor = "border-right border-info";
-                            model.LargeCategory = new SelectList(incomeLargeCategoryList, "IncomeLargeCategoryId", "IncomeLargeCategoryName", model.SelectLargeCategory);
-                            model.MiddleCategory = new SelectList(incomeMiddleCategoryList, "IncomeMiddleCategoryId", "IncomeMiddleCategoryName", model.SelectMiddleCategory);
+
+                            // 多階層でないプルダウンリスト
+                            // model.LargeCategory = new SelectList(model.IncomeLargeCategories, "IncomeLargeCategoryId", "IncomeLargeCategoryName", model.SelectLargeCategory);
+                            // model.MiddleCategory = new SelectList(model.IncomeMiddleCategories, "IncomeMiddleCategoryId", "IncomeMiddleCategoryName", model.SelectMiddleCategory);
                             model.IncomeOrSpendDate = date;
                             break;
                         case (int)PaymentType.Spend:
@@ -61,8 +63,6 @@ namespace TutorialMoneyAdmin.Controllers.Calender
                             model.IncomeOrSpendWordColor = "text-danger";
                             model.IncomeOrSpendBorderColor = "border border-danger";
                             model.IncomeOrSpendSeparateBorderColor = "border-right border-danger";
-                            model.LargeCategory = new SelectList(spendLargeCategoryList, "SpendLargeCategoryId", "SpendLargeCategoryName", model.SelectLargeCategory);
-                            model.MiddleCategory = new SelectList(spendMiddleCategoryList, "SpendMiddleCategoryId", "SpendMiddleCategoryName", model.SelectMiddleCategory);
                             model.IncomeOrSpendDate = date;
                             break;
                     }
@@ -96,6 +96,31 @@ namespace TutorialMoneyAdmin.Controllers.Calender
                 else
                 {
                     var spendMiddleCategoryList = IncomeOrSpendCategoryDataService.CreateSpendMiddleCategory(selectCategory, conn);
+                    return Json(spendMiddleCategoryList);
+                }
+            }
+        }
+
+        /// <summary>
+        /// カレンダー日付クリック時に生成されるモーダルを作成
+        /// </summary>
+        /// <param name="selectMiddleCategoryId">ドロップダウンでどの中カテゴリーを選択したか。</param>
+        /// <param name="mode">収入か支出どちらを選択しているか。</param>
+        /// <returns>"mode"</returns>
+        [HttpPost]
+        public JsonResult SelectMiddleCategory(int selectMiddleCategoryId, int mode)
+        {
+            var connectionString = CommonDataService.GetConnectionString();
+            using (var conn = new MySqlConnection(connectionString))
+            {
+                if (mode == (int)PaymentType.Income)
+                {
+                    var incomeSelectLargeCategoryList = IncomeOrSpendCategoryDataService.CreateIncomeLargeCategoryFromMiddleCategory(selectMiddleCategoryId, conn);
+                    return Json(incomeSelectLargeCategoryList);
+                }
+                else
+                {
+                    var spendMiddleCategoryList = IncomeOrSpendCategoryDataService.CreateSpendLargeCategory(conn);
                     return Json(spendMiddleCategoryList);
                 }
             }

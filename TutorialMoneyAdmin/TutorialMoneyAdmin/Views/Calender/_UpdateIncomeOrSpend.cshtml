@@ -58,29 +58,73 @@
                 </div>
                 <div class='container @Model.IncomeOrSpendBorderColor' id='large_category_group'>
                     <div class='row'>
-                        <div class="col-3 @Model.IncomeOrSpendSeparateBorderColor left-column align-items-center justify-content-center" id="amount-important">
+                        <div class="col-3 @Model.IncomeOrSpendSeparateBorderColor left-column align-items-center justify-content-center pb-0" id="amount-important">
                             <label class="font-weight-bold @Model.IncomeOrSpendWordColor ml-2 mt-2 mb-2">項目</label>
                             <br>
-                            <span>
+                            <label class="mb-3">
                                 ※項目を選択しない場合は、未分類となります。
-                            </span>
+                            </label>
+                            <br>
                         </div>
-                        <div class="col-7 right-column align-items-center justify-content-center" id="amount-important">
-                            <div class='large-category mt-3'>
-                                @Html.DropDownListFor(m => m.SelectLargeCategory, @Model.LargeCategory as SelectList, htmlAttributes: new { @class = "form-control" })
+                        <div class="dropdown col-7" style="max-height: 40px;">
+                            <button class="btn btn-secondary form-control mt-3 dropdown-toggle" id="btnOpenMenu" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                未分類
+                            </button>
+                            <ul class="dropdown-menu">
+                                
+                                @if (Model.IncomeOrSpendMode == 1)
+                                {
+                                    foreach (var item in Model.IncomeLargeCategories)
+                                    {
+                                        <li class=" drop-hover dropright">
+                                            <a class="dropdown-item  dropdown-toggle" data-value="@item.IncomeLargeCategoryId">@item.IncomeLargeCategoryName</a>
+                                            <ul class="dropdown-menu" id="@("dropdown-menu-sub" + item.IncomeLargeCategoryId)"></ul>
+                                        </li>
+                                        
+                                    }
+                                }
+                                else
+                                {
+                                    foreach (var item in Model.SpendLargeCategories)
+                                    {
+                                        <li class=" drop-hover dropright">
+                                            <a class="dropdown-item  dropdown-toggle" data-value="@item.SpendLargeCategoryId">@item.SpendLargeCategoryName</a>
+                                            <ul class="dropdown-menu" id="dropdown-menu-sub"></ul>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary form-control mt-3" type="button" id="dropdownMenuButton">
+                                    未分類
+                                </button>
+                                <div class="dropdown-menu">
+                                    @if (Model.IncomeOrSpendMode == 1)
+                                    {
+                                        foreach (var item in Model.IncomeMiddleCategories)
+                                        {
+                                            <a class="dropdown-item">@item.IncomeMiddleCategoryName</a>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        foreach (var item in Model.SpendMiddleCategories)
+                                        {
+                                            <a class="dropdown-item">@item.SpendMiddleCategoryName</a>
+                                        }
+                                    }
+                                </div>
                             </div>
-                            <div class='middle-category mt-3' id='target-js-content-field'>
-                                @Html.DropDownListFor(m => m.SelectMiddleCategory, @Model.MiddleCategory as SelectList, htmlAttributes: new { @class = "form-control" })
-                            </div>
-                            @Html.EditorFor(m => m.CategoryRemarks, new { htmlAttributes = new { @class = "form-control mt-3 mb-3", @placeholder = "内容をご入力下さい(任意)" } })
+                            @Html.EditorFor(m => m.CategoryRemarks, new { htmlAttributes = new { @class = "form-control mt-3", @placeholder = "内容をご入力下さい(任意)" } })
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer align-items-center justify-content-center @Model.IncomeOrSpendBorderColor border border-right-0 border border-left-0 border border-bottom-0">
+                <div class="modal-footer align-items-center justify-content-center">
                     <button type="button" class="btn btn-primary">登録</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 

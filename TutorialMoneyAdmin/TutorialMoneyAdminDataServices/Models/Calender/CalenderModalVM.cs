@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TutorialMoneyAdminDataServices.Models.Category;
 
 namespace TutorialMoneyAdminDataServices.Models.Calender
 {
@@ -48,14 +49,24 @@ namespace TutorialMoneyAdminDataServices.Models.Calender
         public IEnumerable<CalenderModal> CalenderModal { get; set; }
 
         /// <summary>
-        /// 大カテゴリーリスト
+        /// 収入大カテゴリーデータリスト
         /// <summary>
-        public SelectList LargeCategory { get; set; }
+        public List<IncomeLargeCategory> IncomeLargeCategories { get; set; }
 
         /// <summary>
-        /// 中カテゴリーリスト
+        /// 収入中カテゴリーデータリスト
         /// <summary>
-        public SelectList MiddleCategory { get; set; }
+        public List<IncomeMiddleCategory> IncomeMiddleCategories { get; set; }
+
+        /// <summary>
+        /// 支出大カテゴリーデータリスト
+        /// <summary>
+        public List<SpendLargeCategory> SpendLargeCategories { get; set; }
+
+        /// <summary>
+        /// 支出中カテゴリーデータリスト
+        /// <summary>
+        public List<SpendMiddleCategory> SpendMiddleCategories { get; set; }
 
         /// <summary>
         /// 選択している大カテゴリー項目
@@ -112,18 +123,22 @@ namespace TutorialMoneyAdminDataServices.Models.Calender
             /// <summary>
             /// 収入大カテゴリー未分類ID
             /// <summary>
+            [Display(Name = "未分類")]
             IncomeLargeCategoryId = 2,
             /// <summary>
             /// 支出大カテゴリー未分類ID
             /// <summary>
+            [Display(Name = "未分類")]
             SpendLargeCategoryId = 18,
             /// <summary>
             /// 収入中カテゴリー未分類ID
             /// <summary>
+            [Display(Name = "未分類")]
             IncomeMiddleCategoryId = 9,
             /// <summary>
             /// 支出中カテゴリー未分類ID
             /// <summary>
+            [Display(Name = "未分類")]
             SpendMiddleCategoryId = 98
         }
     }

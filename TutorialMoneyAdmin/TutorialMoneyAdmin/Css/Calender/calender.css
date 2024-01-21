@@ -19,3 +19,22 @@ body {
     font-family: "游ゴシック体", "YuGothic", "游ゴシック", "Yu Gothic", "Noto Sans JP", "メイリオ", sans-serif;
     font-weight: 400;
 }
+
+.drop-hover:hover > .dropdown-menu {
+    display: block !important;
+}
+
+
+.dropdown {
+    position: relative;
+}
+ul {
+    display: none;
+    position: absolute;
+}
+
+li {
+    cursor: pointer;
+}
+
+
